@@ -3,6 +3,7 @@ import DefaultLayout from "../layouts/DefaultLayout";
 import App from "../App";
 import GuestLayout from "../layouts/GuestLayout";
 import Dashboard from "../pages/Dashboard";
+import QuizGame from "../pages/QuizGame";
 
 const router = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
                 path: "/dashboard",
                 element: <Dashboard />,
             },
+            {
+                path: "/quiz/1",
+                element: <QuizGame />
+            }
         ],
     },
 ]);

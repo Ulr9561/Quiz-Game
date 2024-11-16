@@ -1,7 +1,7 @@
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../../Button";
-import React from "react";
+import React, { forwardRef, useRef } from "react";
 
 export type NotificationProps = {
     id: number;
@@ -15,8 +15,15 @@ const NotificationBell: React.FC<{
     isOpen: boolean;
     onToggle: (value: boolean) => void;
 }> = ({ notifications, isOpen, onToggle }) => {
+    const panelRef = useRef<HTMLDivElement>(null);
+
+    const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
+        if (!panelRef.current?.contains(e.relatedTarget as Node)) {
+            onToggle(false);
+        }
+    };
     return (
-        <div className="relative">
+        <div className="relative" onBlur={handleBlur}>
             <Button
                 color="primary"
                 variant="outlined"
@@ -28,27 +35,35 @@ const NotificationBell: React.FC<{
                     {notifications.length}
                 </span>
             </Button>
-            {isOpen && <NotificationsPanel notifications={notifications} />}
+            {isOpen && (
+                <NotificationsPanel
+                    ref={panelRef}
+                    notifications={notifications}
+                />
+            )}
         </div>
     );
 };
 
-const NotificationsPanel: React.FC<{ notifications: NotificationProps[] }> = ({
-    notifications,
-}) => {
-    return (
-        <div className="absolute font-mono right-0 mt-2 w-80 bg-white dark:bg-dark-tertiary rounded-lg shadow-lg z-50">
-            <div className="p-4">
-                <h3 className="font-bold mb-4">Notifications</h3>
-                <div className="space-y-3">
-                    {notifications.map((notif) => (
-                        <NotificationItem key={notif.id} notification={notif} />
-                    ))}
-                </div>
+const NotificationsPanel = forwardRef<
+    HTMLDivElement,
+    { notifications: NotificationProps[] }
+>(({ notifications }, ref) => (
+    <div
+        ref={ref}
+        tabIndex={0}
+        className="absolute font-mono right-0 mt-2 w-80 bg-white dark:bg-dark-tertiary rounded-lg shadow-lg z-50"
+    >
+        <div className="p-4">
+            <h3 className="font-bold mb-4">Notifications</h3>
+            <div className="space-y-3">
+                {notifications.map((notif) => (
+                    <NotificationItem key={notif.id} notification={notif} />
+                ))}
             </div>
         </div>
-    );
-};
+    </div>
+));
 
 const NotificationItem: React.FC<{ notification: NotificationProps }> = ({
     notification,

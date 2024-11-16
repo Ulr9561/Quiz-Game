@@ -13,3 +13,15 @@ export interface FeatureCardProps {
     title: string;
     description: string;
 }
+
+export type NavbarProps = {
+    isAuthenticated: boolean;
+    links: NavLinkProps[];
+    isQuiz?: boolean;
+};
+
+export interface QuestionProps {
+    question: string;
+    options: string[];
+    answer: number;
+}

@@ -2,8 +2,9 @@ import SearchBar from "./searchBar";
 import { NotificationBell, NotificationProps } from "./notifications";
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCog, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../Button";
+import Menu from "./menu";
 
 type AuthenticatedActionsProps = {
     notifications: NotificationProps[];
@@ -40,19 +41,9 @@ const AuthenticatedActions: React.FC<AuthenticatedActionsProps> = ({
                     onToggle={setOpenNotifications}
                 />
 
-                <Button
-                    color="primary"
-                    variant="outlined"
-                    className="relative p-2 dark:bg-dark-tertiary bg-light-tertiary rounded-full transition-colors"
-                >
-                    <FontAwesomeIcon icon={faCog} className="w-5 h-5" />
-                    <span className="absolute -top-1 -right-1 bg-light-error dark:bg-dark-error text-white rounded-full w-4 h-4 text-xs flex items-center justify-center">
-                        {notifications.length}
-                    </span>
-                </Button>
+                <Menu />
             </div>
 
-            {/* Barre de recherche mobile overlay */}
             {isSearchOpen && (
                 <SearchBar
                     isMobile

@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { NavLinkProps } from "../../types";
+import { NavbarProps } from "../../types";
 import Button from "../Button";
 import NavLink from "../Link";
 import ToggleDarkMode from "../Theme";
@@ -7,10 +7,6 @@ import { faBars, faClose } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import AuthenticatedActions from "./components/actions";
 
-type NavbarProps = {
-    isAuthenticated: boolean;
-    links: NavLinkProps[];
-};
 
 const UnauthenticatedActions: React.FC = () => {
     return (
@@ -48,12 +44,29 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, links }) => {
             time: "2 hours ago",
         },
     ]);
-
+    const authenticatedLinks = [
+        {
+            href: "/",
+            label: "Categories",
+        },
+        {
+            href: "/",
+            label: "Quizs",
+        },
+        {
+            href: "/",
+            label: "Amis",
+        },
+        {
+            href: "/",
+            label: "Evenements",
+        },
+    ];
     return (
         <nav className="fixed top-0 left-0 right-0 h-[72px] z-50 bg-light-tertiary dark:bg-dark-tertiary border-b border-b-light-border dark:border-b-dark-border shadow-md">
             <div className="container h-full mx-auto px-4">
                 <div className="flex items-center justify-between h-full">
-                    {/* Logo section */}
+                    
                     <div className="flex items-center space-x-3">
                         <ToggleDarkMode />
                         <svg
@@ -75,8 +88,14 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, links }) => {
                         </NavLink>
                     </div>
 
+                    {isAuthenticated && (
+                        <div className="lg:flex flex-1 hidden justify-center items-center gap-8">
+                            {authenticatedLinks.map((link) => (
+                                <NavLink key={link.label} href={link.href}>{link.label}</NavLink>
+                            ))}
+                        </div>
+                    )}
                     {isAuthenticated ? (
-
                         <div className="flex flex-1 items-center justify-end">
                             <AuthenticatedActions
                                 notifications={notifications}
@@ -85,19 +104,17 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, links }) => {
                             />
                         </div>
                     ) : (
-
                         <>
-
                             <div
                                 className={`
                 md:relative md:flex md:flex-row md:h-auto md:w-auto md:bg-transparent
-                absolute top-[72px] left-0 right-0 md:top-0 
+                absolute top-[72px] left-0 right-0 md:top-0
                 border-b border-light-border dark:border-dark-border md:shadow-none shadow-lg
                 transition-all duration-300 ease-in-out
-                ${menu ? "flex flex-col" : "hidden md:flex"}
+                ${menu ? "flex flex-col bg-light-background dark:bg-dark-background" : "hidden md:flex "}
               `}
                             >
-                                <div className="container flex flex-col md:flex-row md:items-center md:space-x-4 space-y-4 md:space-y-0 px-4 py-4 md:p-0">
+                                <div className="container   flex flex-col md:flex-row md:items-center md:space-x-4 space-y-4 md:space-y-0 px-4 py-4 md:p-0">
                                     <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
                                         {links.map((link, index) => (
                                             <NavLink
