@@ -15,3 +15,4 @@ const usePreventReload = (onUnloadCallback: () => void) => {
 };
 
 export default usePreventReload;
+

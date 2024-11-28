@@ -4,12 +4,19 @@ import App from "../App";
 import GuestLayout from "../layouts/GuestLayout";
 import Dashboard from "../pages/Dashboard";
 import QuizGame from "../pages/QuizGame";
+import Categories from "../pages/Categories";
+import SignUp from "../pages/Auth/Register";
+import LoginPage from "../pages/Auth/Login";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <GuestLayout />,
-        children: [{ path: "/", element: <App /> }],
+        children: [
+            { path: "/", element: <App /> },
+            { path: "/signup", element: <SignUp /> },
+            { path: "/login", element: <LoginPage /> },
+        ],
     },
     {
         path: "/",
@@ -20,9 +27,13 @@ const router = createBrowserRouter([
                 element: <Dashboard />,
             },
             {
-                path: "/quiz/1",
-                element: <QuizGame />
-            }
+                path: "/quiz/:id",
+                element: <QuizGame />,
+            },
+            {
+                path: "/categories",
+                element: <Categories />,
+            },
         ],
     },
 ]);

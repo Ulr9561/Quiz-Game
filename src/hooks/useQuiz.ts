@@ -1,69 +1,53 @@
-import { useState, useEffect, useCallback } from "react";
-import { sampleQuestions } from "../utils/data";
+import { useMemo, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { endQuiz, selectQuiz, updateScore } from "../app/slices/quiz";
+import correctSFX from "../assets/sfx/correct-156911.mp3";
+import wrongSFX from "../assets/sfx/error-5-199276.mp3";
+import { QuizManager } from "../services/QuizManager";
 
 export const useQuiz = () => {
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [score, setScore] = useState(0);
-    const [totalTimeLeft, setTotalTimeLeft] = useState(180);
-    const [selectedOption, setSelectedOption] = useState<number | null>(null);
-    const [isCorrect, setIsCorrect] = useState(false);
-    const [isOptionDisabled, setIsOptionDisabled] = useState(false);
+    const dispatch = useAppDispatch();
+    const quiz = useAppSelector(selectQuiz);
+
+    const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
     const [direction, setDirection] = useState(0);
 
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setTotalTimeLeft((prev) => {
-                if (prev > 0) return prev - 1;
-                clearInterval(timer);
-                return 0;
-            });
-        }, 1000);
+    const quizManager = useMemo(() => {
+        return quiz ? new QuizManager(quiz) : null;
+    }, [quiz]);
 
-        return () => clearInterval(timer);
-    }, [totalTimeLeft]);
+    const currentQuestion = quizManager?.getCurrentQuestion();
 
-    const handleAnswerSelect = useCallback(
-        (optionIndex: number) => {
-            if (isOptionDisabled) return;
-            setIsOptionDisabled(true);
-            setSelectedOption(optionIndex);
 
-            if (optionIndex === sampleQuestions[currentQuestionIndex].answer) {
-                setScore((prevScore) => prevScore + 1);
-                setIsCorrect(true);
-            } else {
-                setIsCorrect(false);
-            }
+    const handleAnswer = (optionIndex: number) => {
+        if (!quizManager) return;
 
-            setTimeout(() => {
-                setSelectedOption(null);
-                setIsOptionDisabled(false);
-                setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-            }, 2000);
-        },
-        [currentQuestionIndex, isOptionDisabled],
-    );
+        const correct = quizManager.validateAnswer(optionIndex);
+        setIsCorrect(correct);
 
-    const handleRestart = () => {
+        dispatch(updateScore(quizManager.getScore()));
+
+        if (quizManager.isQuizOver()) {
+            dispatch(endQuiz());
+        }
+    };
+
+    const restartQuiz = () => {
+        if (!quizManager) return;
+
+        quizManager.restartQuiz();
+        setIsCorrect(null);
+        dispatch(updateScore(0));
         setDirection(-1);
-        setCurrentQuestionIndex(0);
-        setScore(0);
-        setTotalTimeLeft(180);
-        setSelectedOption(null);
     };
 
     return {
-        currentQuestion: sampleQuestions[currentQuestionIndex],
-        currentQuestionIndex,
-        totalQuestions: sampleQuestions.length,
-        score,
-        totalTimeLeft,
-        direction,
-        selectedOption,
-        isOptionDisabled,
-        handleAnswerSelect,
-        handleRestart,
+        quizManager,
+        quiz : quiz ? quiz : null,
+        currentQuestion,
         isCorrect,
-        isQuizOver: currentQuestionIndex >= sampleQuestions.length || totalTimeLeft  === 0,
+        handleAnswer,
+        restartQuiz,
+        direction
     };
 };

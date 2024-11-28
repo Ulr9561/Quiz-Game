@@ -18,7 +18,7 @@ const RecommandedQuizzes: React.FC = () => {
                         questionsCount={quiz.questionsCount}
                         averageScore={quiz.averageScore}
                         duration={quiz.duration}
-                        onPlay={quiz.onPlay}
+                        questions={quiz.questions}
                     />
                 ))}
             </div>

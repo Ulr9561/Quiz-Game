@@ -4,9 +4,8 @@ import {
     faBullseye,
     faRankingStar,
 } from "@fortawesome/free-solid-svg-icons";
-import { BoardCardProps } from "../components/Dashboard/ui/boardCard";
-import { QuizCardProps } from "../components/Dashboard/ui/quizCard";
 import { QuestionProps } from "../types";
+import { BoardCardProps, QuizCardProps } from "../components/Dashboard";
 
 export const userStats: BoardCardProps[] = [
     {
@@ -44,8 +43,7 @@ export const quizData: QuizCardProps[] = [
         difficulty: "Débutant",
         questionsCount: 10,
         averageScore: 80,
-        duration: "10 min",
-        onPlay: () => console.log("Playing 'Introduction à la Programmation'"),
+        duration: 10,
         questions: [
             {
                 question: "Quelle est la fonction principale de JavaScript?",
@@ -161,8 +159,40 @@ export const quizData: QuizCardProps[] = [
         difficulty: "Intermédiaire",
         questionsCount: 15,
         averageScore: 65,
-        duration: "15 min",
-        onPlay: () => console.log("Playing 'Histoire du Monde'"),
+        duration: 3600,
+        questions: [
+            {
+                question: "Quelle est la première année de la Seconde Guerre mondiale?",
+                options: ["1914", "1918", "1919", "1920"],
+                answer: 1,
+            },
+            {
+                question: "Quelle est la première année de la Première Guerre mondiale?",
+                options: ["1914", "1918", "1919", "1920"],
+                answer: 0,
+            },
+            {
+                question:
+                    "Quelle est la capitale du Canada et de l'Alberta?",
+                options: ["Ottawa", "Quebec", "Montreal", "Vancouver"],
+                answer: 0,
+            },
+            {
+                question: "Quelle est la capitale du Japon?",
+                options: ["Tokyo", "Osaka", "Kyoto", "Nagoya"],
+                answer: 0,
+            },
+            {
+                question: "Quelle est la capitale du Brésil?",
+                options: ["Sao Paulo", "Rio de Janeiro", "Fortaleza", "Brasília"],
+                answer: 3,
+            },
+            {
+                question: "Quelle est la capitale du Mexique?",
+                options: ["Guadalajara", "Mexico City", "Monterrey", "Cuernavaca"],
+                answer: 1,
+            }
+        ]
     },
     {
         title: "Maîtriser le JavaScript",
@@ -171,8 +201,20 @@ export const quizData: QuizCardProps[] = [
         difficulty: "Avancé",
         questionsCount: 20,
         averageScore: 50,
-        duration: "20 min",
-        onPlay: () => console.log("Playing 'Maîtriser le JavaScript'"),
+        duration: 4200,
+        questions: [
+            {
+                question:
+                    "Quelle est la syntaxe pour itérer sur une liste en JavaScript?",
+                options: [
+                    "for (let i = 0; i < 5; i++) { console.log(i); }",
+                    "for (let i = 0; i <= 5; i++) { console.log(i); }",
+                    "for (let i = 0; i >= 5; i++) { console.log(i); }",
+                    "for (let i = 0; i < 5; i++) { console.log(i); }",
+                ],
+                answer: 0,
+            }
+        ]
     },
     {
         title: "Géographie des Continents",
@@ -181,8 +223,20 @@ export const quizData: QuizCardProps[] = [
         difficulty: "Débutant",
         questionsCount: 12,
         averageScore: 75,
-        duration: "12 min",
-        onPlay: () => console.log("Playing 'Géographie des Continents'"),
+        duration: 9000,
+        questions: [
+            {
+                question: "Quels sont les continents de la Terre?",
+                options: [
+                    "Afrique",
+                    "Antarctique",
+                    "Asie",
+                    "Europe",
+                    "Océanie",
+                ],
+                answer: 4,
+            }
+        ]
     },
     {
         title: "Sciences Physiques",
@@ -191,19 +245,40 @@ export const quizData: QuizCardProps[] = [
         difficulty: "Intermédiaire",
         questionsCount: 15,
         averageScore: 60,
-        duration: "15 min",
-        onPlay: () => console.log("Playing 'Sciences Physiques'"),
+        duration: 3600,
+        questions: [
+            {
+                question: "Quelle est la loi de Newton pour calculer la vitesse d'un objet en mouvement?",
+                options: [
+                    "v = u + at",
+                    "v = u - at",
+                    "v = ut + at",
+                    "v = ut - at",
+                ],
+                answer: 0,
+            }
+        ]
     },
     {
         title: "Culture Pop",
-        description:
-            "Vérifiez vos connaissances sur la culture populaire actuelle.",
+        description: "Vérifiez vos connaissances sur la culture populaire actuelle.",
         category: "Divertissement",
         difficulty: "Débutant",
         questionsCount: 10,
         averageScore: 85,
-        duration: "8 min",
-        onPlay: () => console.log("Playing 'Culture Pop'"),
+        duration: 2600,
+        questions: [
+            {
+                question: "Quelle est la cité la plus populaire en France?",
+                options: [
+                    "Paris",
+                    "Lille",
+                    "Marseille",
+                    "Nantes",
+                ],
+                answer: 0,
+            }
+        ]
     },
     {
         title: "Mathématiques Avancées",
@@ -212,30 +287,46 @@ export const quizData: QuizCardProps[] = [
         difficulty: "Avancé",
         questionsCount: 25,
         averageScore: 40,
-        duration: "25 min",
-        onPlay: () => console.log("Playing 'Mathématiques Avancées'"),
+        duration: 480000,
+        questions: [
+            {
+                question: "Quelle est la somme des nombres de 1 à 100?",
+                options: ["5050", "5000", "5051", "5001"],
+                answer: 0,
+            }
+        ]
     },
     {
         title: "Gastronomie Française",
-        description:
-            "Découvrez des faits intéressants sur la cuisine française.",
+        description: "Découvrez des faits intéressants sur la cuisine française.",
         category: "Cuisine",
         difficulty: "Intermédiaire",
         questionsCount: 14,
         averageScore: 70,
-        duration: "10 min",
-        onPlay: () => console.log("Playing 'Gastronomie Française'"),
+        duration: 10,
+        questions: [
+            {
+                question: "Quelle est la capitale du Canada et de l'Alberta?",
+                options: ["Ottawa", "Quebec", "Montreal", "Vancouver"],
+                answer: 0,
+            }
+        ]
     },
     {
         title: "Les Inventions",
-        description:
-            "Qui a inventé quoi ? Découvrez les inventeurs et leurs inventions.",
+        description: "Qui a inventé quoi ? Découvrez les inventeurs et leurs inventions.",
         category: "Science",
         difficulty: "Débutant",
         questionsCount: 12,
         averageScore: 78,
-        duration: "10 min",
-        onPlay: () => console.log("Playing 'Les Inventions'"),
+        duration: 10,
+        questions: [
+            {
+                question: "Qui a inventé le téléphone?",
+                options: ["Marie Curie", "Alexandre Graham Bell", "Nikola Tesla", "Albert Einstein"],
+                answer: 3,
+            }
+        ]
     },
     {
         title: "Économie Mondiale",
@@ -244,8 +335,19 @@ export const quizData: QuizCardProps[] = [
         difficulty: "Avancé",
         questionsCount: 18,
         averageScore: 55,
-        duration: "18 min",
-        onPlay: () => console.log("Playing 'Économie Mondiale'"),
+        duration: 18,
+        questions: [
+            {
+                question: "Quelle est la loi de Keynesian économie?",
+                options: [
+                    "La croissance des prix",
+                    "La stabilité des prix",
+                    "La stabilité du prix et la croissance des prix",
+                    "La croissance du prix et la stabilité des prix",
+                ],
+                answer: 2,
+            }
+        ]
     },
     {
         title: "Mythologie Grecque",
@@ -254,52 +356,70 @@ export const quizData: QuizCardProps[] = [
         difficulty: "Intermédiaire",
         questionsCount: 15,
         averageScore: 68,
-        duration: "12 min",
-        onPlay: () => console.log("Playing 'Mythologie Grecque'"),
+        duration: 12,
+        questions: [
+            {
+                question: "Qui est le roi de la Gaule et de la Grèce?",
+                options: [
+                    "Apollon",
+                    "Perseus",
+                    "Dionysus",
+                    "Hercules",
+                ],
+                answer: 1,
+            }
+        ]
     },
     {
         title: "Art et Peinture",
-        description:
-            "Reconnaissez-vous les plus grands chefs-d'œuvre de la peinture ?",
+        description: "Reconnaissez-vous les plus grands chefs-d'œuvre de la peinture ?",
         category: "Art",
         difficulty: "Intermédiaire",
         questionsCount: 10,
         averageScore: 72,
-        duration: "10 min",
-        onPlay: () => console.log("Playing 'Art et Peinture'"),
+        duration: 10,
+        questions: [
+            {
+                question: "Qui est le chef-d'oeuvre de la peinture romaine?",
+                options: [
+                    "Raphael",
+                    "Vincent van Gogh",
+                    "Pierre-Auguste Renoir",
+                    "Edgar Degas",
+                ],
+                answer: 0,
+            }
+        ]
     },
     {
         title: "Système Solaire",
-        description:
-            "Un quiz pour en apprendre plus sur les planètes et l'univers.",
+        description: "Un quiz pour en apprendre plus sur les planètes et l'univers.",
         category: "Science",
         difficulty: "Débutant",
         questionsCount: 10,
         averageScore: 82,
-        duration: "9 min",
-        onPlay: () => console.log("Playing 'Système Solaire'"),
+        duration: 9,
+        questions: []
     },
     {
         title: "Langues du Monde",
-        description:
-            "Connaissez-vous les langues et dialectes autour du monde ?",
+        description: "Connaissez-vous les langues et dialectes autour du monde ?",
         category: "Culture",
         difficulty: "Intermédiaire",
         questionsCount: 15,
         averageScore: 64,
-        duration: "12 min",
-        onPlay: () => console.log("Playing 'Langues du Monde'"),
+        duration: 12,
+        questions: []
     },
     {
         title: "Animaux Insolites",
-        description:
-            "Un quiz amusant sur les animaux rares et leurs particularités.",
+        description: "Un quiz amusant sur les animaux rares et leurs particularités.",
         category: "Nature",
         difficulty: "Débutant",
         questionsCount: 8,
         averageScore: 87,
-        duration: "7 min",
-        onPlay: () => console.log("Playing 'Animaux Insolites'"),
+        duration: 7,
+        questions: []
     },
 ];
 

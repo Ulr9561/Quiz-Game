@@ -1,12 +1,7 @@
-import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { BoardCardProps } from "..";
 
-export type BoardCardProps = {
-    title: string;
-    value: string | number;
-    color?: string;
-    icon: IconDefinition;
-}
+
 
 const BoardCard: React.FC<BoardCardProps> = ({title, icon, value, color}) => {
     return (

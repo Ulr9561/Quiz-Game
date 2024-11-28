@@ -1,0 +1,220 @@
+[
+    {
+        "category": "Sciences",
+        "tags": [
+            "physique",
+            "chimie",
+            "biologie",
+            "astronomie",
+            "mathématiques",
+            "écologie"
+        ]
+    },
+    {
+        "category": "Technologie",
+        "tags": [
+            "informatique",
+            "intelligence artificielle",
+            "robotique",
+            "électronique",
+            "internet",
+            "cybersécurité"
+        ]
+    },
+    {
+        "category": "Histoire",
+        "tags": [
+            "antiquité",
+            "moyen âge",
+            "révolutions",
+            "personnages historiques",
+            "guerres mondiales",
+            "histoire africaine"
+        ]
+    },
+    {
+        "category": "Géographie",
+        "tags": [
+            "pays",
+            "capitales",
+            "cultures",
+            "cartes",
+            "rivières",
+            "montagnes"
+        ]
+    },
+    {
+        "category": "Divertissement",
+        "tags": [
+            "cinéma",
+            "séries",
+            "musique",
+            "jeux vidéo",
+            "célébrités",
+            "culture pop"
+        ]
+    },
+    {
+        "category": "Sport",
+        "tags": [
+            "football",
+            "basketball",
+            "tennis",
+            "olympiades",
+            "athlétisme",
+            "records sportifs"
+        ]
+    },
+    {
+        "category": "Cuisine",
+        "tags": [
+            "recettes",
+            "ingrédients",
+            "cuisine mondiale",
+            "chefs célèbres",
+            "cuisine africaine",
+            "desserts"
+        ]
+    },
+    {
+        "category": "Langues et Littérature",
+        "tags": [
+            "grammaire",
+            "orthographe",
+            "poésie",
+            "romans",
+            "écrivains",
+            "langues étrangères"
+        ]
+    },
+    {
+        "category": "Philosophie",
+        "tags": [
+            "courants philosophiques",
+            "philosophes",
+            "éthique",
+            "logique",
+            "métaphysique",
+            "citations"
+        ]
+    },
+    {
+        "category": "Mode et Beauté",
+        "tags": [
+            "tendances",
+            "maquillage",
+            "stylistes",
+            "histoire de la mode",
+            "défilés",
+            "soins de la peau"
+        ]
+    },
+    {
+        "category": "Voyages",
+        "tags": [
+            "paysages",
+            "sites touristiques",
+            "cultures locales",
+            "gastronomie",
+            "cartes",
+            "pays exotiques"
+        ]
+    },
+    {
+        "category": "Économie et Affaires",
+        "tags": [
+            "entrepreneuriat",
+            "marchés financiers",
+            "startups",
+            "économie mondiale",
+            "monnaies",
+            "commerce international"
+        ]
+    },
+    {
+        "category": "Santé et Bien-être",
+        "tags": [
+            "médecine",
+            "nutrition",
+            "exercice",
+            "psychologie",
+            "maladies",
+            "remèdes naturels"
+        ]
+    },
+    {
+        "category": "Art et Design",
+        "tags": [
+            "peinture",
+            "sculpture",
+            "architecture",
+            "photographie",
+            "dessin",
+            "histoire de l'art"
+        ]
+    },
+    {
+        "category": "Culture Générale",
+        "tags": [
+            "divers",
+            "faits intéressants",
+            "questions aléatoires",
+            "curiosités",
+            "sujets variés"
+        ]
+    },
+    {
+        "category": "Devinettes et Jeux de Logique",
+        "tags": [
+            "énigmes",
+            "sudoku",
+            "jeux de mots",
+            "casse-têtes",
+            "problèmes logiques"
+        ]
+    },
+    {
+        "category": "Sciences Sociales",
+        "tags": [
+            "psychologie",
+            "sociologie",
+            "anthropologie",
+            "politique",
+            "culture",
+            "religion"
+        ]
+    },
+    {
+        "category": "Animaux et Nature",
+        "tags": [
+            "faune",
+            "flore",
+            "écosystèmes",
+            "climat",
+            "espèces menacées",
+            "planète terre"
+        ]
+    },
+    {
+        "category": "L'Univers et l'Espace",
+        "tags": [
+            "planètes",
+            "étoiles",
+            "galaxies",
+            "missions spatiales",
+            "astronautes",
+            "cosmologie"
+        ]
+    },
+    {
+        "category": "Humour et Fun",
+        "tags": [
+            "blagues",
+            "memes",
+            "faits amusants",
+            "anecdotes drôles",
+            "jeux légers",
+            "quiz marrants"
+        ]
+    }
+]

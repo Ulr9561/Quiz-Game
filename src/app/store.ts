@@ -1,14 +1,26 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import navbarReducer from "./slices/navbar"
+import navbarReducer from "./slices/navbar";
+import quizReducer from "./slices/quiz";
+import { persistStore } from "redux-persist";
 
 const rootReducer = combineReducers({
     navbarReducer,
-});
-export const store = configureStore({
-    reducer: rootReducer,
+    quizReducer,
 });
 
+export const store = configureStore({
+    reducer: rootReducer,
+    devTools: process.env.NODE_ENV !== "production",
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: ["persist/REHYDRATE", "persist/PERSIST"],
+            },
+        }),
+});
+
+export const persistor = persistStore(store);
+
 export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;
 export type AppStore = typeof store;

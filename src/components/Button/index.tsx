@@ -15,9 +15,9 @@ const Button: React.FC<ButtonProps> = ({ type, children, className, variant, siz
         <button
             type={type}
             className={cn(
-                "flex justify-center items-center focus:outline-none border-none text-light-textPrimary dark:text-dark-textPrimary cursor-pointer p-4 font-grotesk font-bold lg:text-lg text-base outline-none transition-all duration-200 rounded-sm",
+                "flex justify-center items-center focus:outline-none border-none disabled:opacity-55 disabled:pointer-events-none text-light-textPrimary dark:text-dark-textPrimary cursor-pointer p-4 font-grotesk font-bold lg:text-lg text-base outline-none transition-all duration-200 rounded-sm",
                 color === "primary" &&
-                    "bg-light-primary active:bg-light-primary  hover:bg-light-primary/80 dark:bg-dark-primary dark:hover:bg-light-primary/80 dark:active:bg-dark-primary ",
+                    "bg-light-primary active:bg-light-primary   hover:bg-light-primary/80 dark:bg-dark-primary dark:hover:bg-light-primary/80 dark:active:bg-dark-primary ",
                 color === "secondary" &&
                     "bg-light-secondary hover:bg-light-secondary/80 dark:bg-dark-secondary  dark:hover:bg-dark-secondary/80",
                 size === "small" && "text-sm px-3 py-1.5 h-8",

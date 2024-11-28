@@ -46,16 +46,12 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, links }) => {
     ]);
     const authenticatedLinks = [
         {
-            href: "/",
+            href: "/categories",
             label: "Categories",
         },
         {
-            href: "/",
-            label: "Quizs",
-        },
-        {
-            href: "/",
-            label: "Amis",
+            href: "/dashboard",
+            label: "Dashboard",
         },
         {
             href: "/",
@@ -66,7 +62,6 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, links }) => {
         <nav className="fixed top-0 left-0 right-0 h-[72px] z-50 bg-light-tertiary dark:bg-dark-tertiary border-b border-b-light-border dark:border-b-dark-border shadow-md">
             <div className="container h-full mx-auto px-4">
                 <div className="flex items-center justify-between h-full">
-                    
                     <div className="flex items-center space-x-3">
                         <ToggleDarkMode />
                         <svg
@@ -114,7 +109,7 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, links }) => {
                 ${menu ? "flex flex-col bg-light-background dark:bg-dark-background" : "hidden md:flex "}
               `}
                             >
-                                <div className="container   flex flex-col md:flex-row md:items-center md:space-x-4 space-y-4 md:space-y-0 px-4 py-4 md:p-0">
+                                <div className="container flex flex-col md:flex-row md:items-center md:space-x-4 space-y-4 md:space-y-0 px-4 py-4 md:p-0">
                                     <div className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4">
                                         {links.map((link, index) => (
                                             <NavLink
@@ -136,7 +131,6 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, links }) => {
                                 </div>
                             </div>
 
-                            {/* Bouton hamburger pour mobile en mode non authentifié */}
                             <div className="md:hidden">
                                 <Button
                                     color="primary"

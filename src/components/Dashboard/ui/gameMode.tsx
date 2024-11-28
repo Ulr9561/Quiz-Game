@@ -2,9 +2,11 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faUsers, faCalendar } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../Button";
+import { useNavigate } from "react-router-dom";
 
 const GameModeSelector = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const navigate = useNavigate();
     const [selectedMode, setSelectedMode] = useState<
         "solo" | "multiplayer" | "events" | null
     >(null);
@@ -36,8 +38,10 @@ const GameModeSelector = () => {
 
     const handleSelectMode = (mode: "solo" | "multiplayer" | "events") => {
         setSelectedMode(mode);
+
         setIsModalOpen(false);
         console.log(`Mode sélectionné : ${selectedMode}`);
+        navigate("/categories");
     };
 
     return (

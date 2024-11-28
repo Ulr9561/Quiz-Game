@@ -58,7 +58,7 @@ const Toast: React.FC<ToastProps> = ({ title, message, type, onClose }) => {
 
     return (
         <div
-            className={`fixed hidden font-mono top-20 right-4 z-50 bg-light-tertiary dark:bg-dark-tertiary w-80 max-w-xs shadow-lg rounded-lg overflow-hidden transform transition-all duration-300 ease-in-out ${typeStyles[type]}`}
+            className={`fixed font-mono top-20 right-4 z-50 bg-light-tertiary dark:bg-dark-tertiary w-80 max-w-xs shadow-lg rounded-lg overflow-hidden transform transition-all duration-300 ease-in-out ${typeStyles[type]}`}
             role="alert"
         >
             <div className="flex p-4 space-x-3 items-start">

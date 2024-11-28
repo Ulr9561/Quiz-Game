@@ -3,7 +3,7 @@ import Button from "../../Button";
 
 export interface QuizOptionsProps {
     options: string[];
-    selectedOption: number | null;
+    selectedOption?: number | null;
     handleOptionSelect: (index: number) => void;
     disabled: boolean;
     correctAnswer: number | null;
@@ -42,7 +42,7 @@ const QuizOptions: React.FC<QuizOptionsProps> = ({
 
     return (
         <motion.div
-            className="grid md:grid-cols-2 grid-cols-1 gap-4"
+            className="grid grid-cols-2 gap-4"
             variants={containerVariants}
             initial="hidden"
             animate="visible"

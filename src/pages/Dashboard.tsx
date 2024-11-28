@@ -9,8 +9,8 @@ import { faShield } from "@fortawesome/free-solid-svg-icons";
 import Avatar from "../assets/avatar.jpg";
 
 const Dashboard: React.FC = () => {
-    const [activeTab, setActiveTab] = useState("recommended");
-
+    const [activeTab, setActiveTab] = useState("recent");
+    
     return (
         <div className="min-h-screen font-mono p-8 bg-light-background dark:bg-dark-background">
             <div className="flex flex-col md:flex-row justify-between items-start mb-10">
@@ -67,42 +67,6 @@ const Dashboard: React.FC = () => {
                 </div>
             </div>
 
-            <div className="mb-12">
-                <div className="flex border-b font-mono border-light-border dark:border-dark-border">
-                    <Button
-                        color="tertiary"
-                        variant="outlined"
-                        onClick={() => setActiveTab("recent")}
-                        className={`pb-4 px-4 font-medium ${
-                            activeTab === "recent"
-                                ? "text-light-primary dark:text-dark-primary border-b-2 border-light-primary dark:border-dark-primary"
-                                : "text-light-textSecondary dark:text-dark-textSecondary"
-                        } transition-colors font-mono`}
-                    >
-                        Activité Récente
-                    </Button>
-                    <Button
-                        color="tertiary"
-                        variant="outlined"
-                        onClick={() => setActiveTab("recommended")}
-                        className={`pb-4 px-4 font-medium ${
-                            activeTab === "recommended"
-                                ? "text-light-primary dark:text-dark-primary border-b-2 border-light-primary dark:border-dark-primary"
-                                : "text-light-textSecondary dark:text-dark-textSecondary"
-                        } transition-colors font-mono`}
-                    >
-                        Recommandés
-                    </Button>
-                </div>
-                <div>
-                    {activeTab === "recent" ? (
-                        <TabContent contentType="recent" />
-                    ) : (
-                        <TabContent contentType="recommended" />
-                    )}
-                </div>
-            </div>
-
             <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
                 {/* Événement spécial */}
                 <div className="bg-gradient-to-r from-light-primary to-purple-500 dark:from-dark-primary/100 dark:to-purple-800 p-6 rounded-lg shadow-md text-white">
@@ -136,6 +100,42 @@ const Dashboard: React.FC = () => {
                         <span>1250 points restants</span>
                         <span>Niveau {43}</span>
                     </div>
+                </div>
+            </div>
+
+            <div className="mb-12">
+                <div className="flex border-b font-mono border-light-border dark:border-dark-border">
+                    <Button
+                        color="tertiary"
+                        variant="outlined"
+                        onClick={() => setActiveTab("recent")}
+                        className={`pb-4 px-4 font-medium ${
+                            activeTab === "recent"
+                                ? "text-light-primary dark:text-dark-primary border-b-2 border-light-primary dark:border-dark-primary"
+                                : "text-light-textSecondary dark:text-dark-textSecondary"
+                        } transition-colors font-mono`}
+                    >
+                        Activité Récente
+                    </Button>
+                    <Button
+                        color="tertiary"
+                        variant="outlined"
+                        onClick={() => setActiveTab("recommended")}
+                        className={`pb-4 px-4 font-medium ${
+                            activeTab === "recommended"
+                                ? "text-light-primary dark:text-dark-primary border-b-2 border-light-primary dark:border-dark-primary"
+                                : "text-light-textSecondary dark:text-dark-textSecondary"
+                        } transition-colors font-mono`}
+                    >
+                        Recommandés
+                    </Button>
+                </div>
+                <div>
+                    {activeTab === "recent" ? (
+                        <TabContent contentType="recent" />
+                    ) : (
+                        <TabContent contentType="recommended" />
+                    )}
                 </div>
             </div>
         </div>

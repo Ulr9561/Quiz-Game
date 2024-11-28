@@ -77,7 +77,7 @@ function App() {
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {features.map((feature) => (
-                            <div className="bg-light-background dark:bg-dark-background p-8 rounded-xl shadow-lg hover:transform hover:scale-105 transition-transform duration-300">
+                            <div key={feature.title} className="bg-light-background dark:bg-dark-background p-8 rounded-xl shadow-lg hover:transform hover:scale-105 transition-transform duration-300">
                                 <div className="text-4xl text-light-primary dark:text-dark-primary mb-4">
                                     <FontAwesomeIcon icon={feature.icon} />
                                 </div>

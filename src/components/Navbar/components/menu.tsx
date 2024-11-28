@@ -25,7 +25,7 @@ const menuItems = [
     },
     {
         name: "Categories",
-        href: "/",
+        href: "/categories",
         icon: faDashboard,
     },
     {

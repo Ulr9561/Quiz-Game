@@ -20,8 +20,48 @@ export type NavbarProps = {
     isQuiz?: boolean;
 };
 
-export interface QuestionProps {
+export type QuestionProps = Question;
+
+export interface Question {
     question: string;
     options: string[];
     answer: number;
+}
+
+export interface Quiz {
+    title: string;
+    description: string;
+    category: string;
+    difficulty: "Débutant" | "Intermédiaire" | "Avancé";
+    questionsCount: number;
+    averageScore: number;
+    duration: number;
+    questions: QuestionProps[];
+}
+
+export interface User {
+    name: string;
+    email: string;
+    username: string;
+    avatar: string;
+    quizzesCreated?: Quiz[];
+    totalScore: number;
+    total_points: number;
+    quizzes_completed?: number;
+    exp: number;
+    rank: number;
+    achievements: [];
+    friends: User[];
+    notifications: Notification[];
+    recentActivities: QuizStat[];
+    progress: number;
+    leaderboardPosition: number;
+}
+
+interface QuizStat {
+    quiz: Quiz;
+    attempts: number;
+    score: number;
+    date: Date;
+    solve_time: string;
 }

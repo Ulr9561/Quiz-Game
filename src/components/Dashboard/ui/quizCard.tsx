@@ -3,30 +3,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faStar, faTrophy } from "@fortawesome/free-solid-svg-icons";
 import { faImage } from "@fortawesome/free-regular-svg-icons";
 import Button from "../../Button";
-import { QuestionProps } from "../../../types";
-
-export interface QuizCardProps {
-    title: string;
-    description: string;
-    category: string;
-    difficulty: "Débutant" | "Intermédiaire" | "Avancé";
-    questionsCount: number;
-    averageScore: number;
-    duration: string;
-    onPlay: () => void;
-    questions?: QuestionProps[];
-}
+import { QuizCardProps } from "..";
+import { useAppDispatch } from "../../../app/hooks";
+import { setQuiz } from "../../../app/slices/quiz";
+import { useNavigate } from "react-router-dom";
+import { setIsQuiz } from "../../../app/slices/navbar";
 
 const QuizCard: React.FC<QuizCardProps> = ({
     title,
     description,
     category,
     difficulty,
+    questions,
     questionsCount,
     averageScore,
     duration,
-    onPlay,
 }) => {
+    const navigate = useNavigate();
     const getDifficultyColor = () => {
         switch (difficulty) {
             case "Débutant":
@@ -39,9 +32,25 @@ const QuizCard: React.FC<QuizCardProps> = ({
                 return "text-gray-500";
         }
     };
+    const dispatch = useAppDispatch();
+
+    const getCategoryColor = () => {
+        switch (category.toLowerCase()) {
+            case "programmation":
+                return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300";
+            case "mathématiques":
+                return "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300";
+            case "sciences":
+                return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
+            case "culture générale":
+                return "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300";
+            default:
+                return "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300";
+        }
+    };
 
     return (
-        <div className="border border-light-border font-mono dark:border-dark-border rounded-lg shadow-md overflow-hidden bg-light-background dark:bg-dark-background max-w-xs">
+        <div className="border hover:-translate-y-2 transition-transform duration-200 border-light-border font-mono dark:border-dark-border rounded-lg shadow-md overflow-hidden bg-light-background dark:bg-dark-background max-w-xs">
             <div className="bg-light-textSecondary dark:bg-dark-textSecondary h-32 flex items-center justify-center">
                 <FontAwesomeIcon
                     icon={faImage}
@@ -53,9 +62,15 @@ const QuizCard: React.FC<QuizCardProps> = ({
                     <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-1">
                         {title}
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-xs mb-1">
-                        {category}
-                    </p>
+
+                    <div className="inline-block mb-2">
+                        <span
+                            className={`text-xs px-2 py-1 rounded-md ${getCategoryColor()}`}
+                        >
+                            {category}
+                        </span>
+                    </div>
+
                     <p className="text-gray-700 dark:text-gray-300 text-xs mb-2">
                         {description}
                     </p>
@@ -85,7 +100,24 @@ const QuizCard: React.FC<QuizCardProps> = ({
                 </div>
                 <Button
                     color="primary"
-                    onClick={onPlay}
+                    onClick={() => {
+                        console.log('Ok but it doesn\'t matter');
+                        dispatch(
+                            setQuiz({
+                                title,
+                                description,
+                                category,
+                                difficulty,
+                                questions,
+                                questionsCount,
+                                averageScore,
+                                duration,
+                            }),
+                        );
+                        dispatch(setIsQuiz(true));
+                        navigate('/quiz/' + title);
+                    }
+                    }
                     className="w-full text-sm py-1.5 rounded-sm transform transition-transform hover:scale-105"
                 >
                     Jouer
