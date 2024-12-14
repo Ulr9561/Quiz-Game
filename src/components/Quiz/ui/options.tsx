@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
-import Button from "../../Button";
+import { RadioGroup, RadioGroupItem } from "../../Forms/ui/radio-group";
+import Label from "../../Forms/ui/label";
+import { cn } from "../../../utils";
 
 export interface QuizOptionsProps {
     options: string[];
@@ -14,7 +16,6 @@ const QuizOptions: React.FC<QuizOptionsProps> = ({
     selectedOption,
     handleOptionSelect,
     disabled,
-    correctAnswer,
 }) => {
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -26,23 +27,9 @@ const QuizOptions: React.FC<QuizOptionsProps> = ({
         },
     };
 
-    const getButtonColor = (index: number) => {
-        if (selectedOption === null) {
-            return "bg-gray-700 hover:scale-105";
-        }
-
-        if (selectedOption === index) {
-            return index === correctAnswer
-                ? "bg-green-500 scale-105"
-                : "bg-red-500 scale-105";
-        }
-
-        return "bg-gray-700";
-    };
-
     return (
         <motion.div
-            className="grid grid-cols-2 gap-4"
+            className="flex flex-col space-y-6"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
@@ -50,25 +37,38 @@ const QuizOptions: React.FC<QuizOptionsProps> = ({
             {options.map((option, index) => (
                 <motion.div
                     key={index}
+                    className="w-full"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: index * 0.1 }}
                 >
-                    <Button
-                        className={`
-                            w-full px-6 py-3
-                            text-left text-white
-                            rounded-lg shadow-lg
-                            font-bold
-                            transition-all duration-300 ease-in-out
-                            ${getButtonColor(index)}
-                            ${disabled ? "cursor-not-allowed opacity-80" : "cursor-pointer"}
-                        `}
-                        onClick={() => !disabled && handleOptionSelect(index)}
-                        disabled={disabled}
+                    <RadioGroup
+                        value={selectedOption?.toString()}
+                        onValueChange={(value) =>
+                            handleOptionSelect(Number(value))
+                        }
+                        className="w-full"
                     >
-                        {option}
-                    </Button>
+                        <div className="flex items-center space-x-4 p-4 border border-light-border dark:border-dark-border rounded-lg bg-white dark:bg-gray-800 hover:shadow-md transition">
+                            <RadioGroupItem
+                                value={index.toString()}
+                                className={cn(
+                                    "transition-all",
+                                    selectedOption === index
+                                        ? "bg-light-primary text-white"
+                                        : "bg-white text-gray-800",
+                                )}
+                                disabled={disabled}
+                                id={`option-${index}`}
+                            />
+                            <Label
+                                htmlFor={`option-${index}`}
+                                className="text-lg font-medium"
+                            >
+                                {option}
+                            </Label>
+                        </div>
+                    </RadioGroup>
                 </motion.div>
             ))}
         </motion.div>

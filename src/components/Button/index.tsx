@@ -28,8 +28,7 @@ const Button: React.FC<ButtonProps> = ({ type, children, className, variant, siz
                 variant === "text" &&
                     "text-light-textPrimary dark:text-dark-textPrimary",
                 variant === "outlined" &&
-                    "bg-transparent border-2 border-light-textPrimary dark:border-dark-textPrimary",
-
+                    "bg-transparent border-1 border-light-textPrimary dark:border-dark-textPrimary",
                 className,
             )}
             {...props}

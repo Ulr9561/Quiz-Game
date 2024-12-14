@@ -14,6 +14,7 @@ export interface QuizHeaderProps {
     totalTimeLeft: number;
     score: number;
     streak: number;
+    xp: number;
     multiplier: number;
 }
 
@@ -26,6 +27,23 @@ const QuizHeader: React.FC<QuizHeaderProps> = ({
     multiplier,
 }) => {
     const [isIncreasing, setIsIncreasing] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        // Check screen size and update isMobile state
+        const checkMobileView = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        // Check initial screen size
+        checkMobileView();
+
+        // Add event listener to check screen size on resize
+        window.addEventListener("resize", checkMobileView);
+
+        // Cleanup event listener
+        return () => window.removeEventListener("resize", checkMobileView);
+    }, []);
 
     useEffect(() => {
         if (score > 0) {
@@ -35,118 +53,138 @@ const QuizHeader: React.FC<QuizHeaderProps> = ({
         }
     }, [score]);
 
-    const getStreakColor = () => {
-        if (streak >= 5) return "text-yellow-500";
-        if (streak >= 3) return "text-orange-500";
-        return "text-light-textPrimary dark:text-dark-textPrimary";
+    const formatTime = (time: number) => {
+        const minutes = Math.floor(time / 60);
+        const seconds = time % 60;
+        return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
     };
 
+    if (isMobile) {
+        return (
+            <header className="container mx-auto h-auto bg-light-primary dark:bg-dark-primary text-light-textPrimary dark:text-dark-textPrimary px-4 py-3">
+                <div className="flex flex-col space-y-2">
+                    <div className="flex justify-between items-center">
+                        <div className="flex items-center space-x-2">
+                            <FontAwesomeIcon
+                                icon={faBullseye}
+                                className="text-lg dark:text-dark-success text-light-success"
+                            />
+                            <span className="text-sm font-semibold">
+                                Q {currentQuestion}/{totalQuestions}
+                            </span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                            <FontAwesomeIcon
+                                icon={faClock}
+                                className="text-lg text-light-success dark:text-dark-success"
+                            />
+                            <span className="text-sm font-semibold">
+                                {formatTime(totalTimeLeft)}
+                            </span>
+                        </div>
+                    </div>
+                    <div className="flex justify-between items-center">
+                        <motion.div
+                            initial={{ scale: 1 }}
+                            animate={
+                                isIncreasing ? { scale: 1.2 } : { scale: 1 }
+                            }
+                            transition={{ duration: 0.3 }}
+                            className="flex items-center space-x-2"
+                        >
+                            <FontAwesomeIcon
+                                icon={faTrophy}
+                                className="text-lg text-light-success dark:text-dark-success"
+                            />
+                            <span className="text-sm font-semibold">
+                                Score: {score}
+                            </span>
+                        </motion.div>
+                        <div className="flex items-center space-x-2">
+                            <FontAwesomeIcon
+                                icon={faBolt}
+                                className="text-lg text-light-success dark:text-dark-success"
+                            />
+                            <span className="text-sm font-semibold">
+                                Streak: {streak}x
+                            </span>
+                        </div>
+                    </div>
+                    <div className="flex justify-center items-center">
+                        <div className="flex items-center space-x-2">
+                            <FontAwesomeIcon
+                                icon={faBolt}
+                                className="text-lg text-light-success dark:text-dark-success"
+                            />
+                            <span className="text-sm font-semibold">
+                                Multiplier: {multiplier}x
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        );
+    }
+
     return (
-        <div className="max-w-4xl mx-auto">
-            <div className="sm:grid flex flex-row sm:grid-cols-2 md:grid-cols-4 gap-4">
-                <motion.div
-                    className="bg-light-secondary min-w-28 sm:block flex items-center flex-col dark:bg-dark-tertiary rounded-2xl p-4 backdrop-blur-lg bg-opacity-90 dark:bg-opacity-90"
-                    initial={{ scale: 0.9, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                >
-                    <div className="flex items-center justify-between">
-                        <FontAwesomeIcon
-                            icon={faBullseye}
-                            className="text-light-primary w-9 h-9 dark:text-dark-primary"
-                        />
-                        <div className="sm:block hidden text-xs text-light-textSecondary dark:text-dark-textSecondary">
-                            Progression
-                        </div>
-                    </div>
-                    <div className="mt-2 text-2xl font-bold">
-                        {currentQuestion}/{totalQuestions}
-                    </div>
-                </motion.div>
-
-                <motion.div
-                    className="bg-light-secondary min-w-28 dark:bg-dark-tertiary sm:block flex items-center flex-col rounded-2xl p-4 backdrop-blur-lg bg-opacity-90 dark:bg-opacity-90"
-                    animate={{
-                        scale: totalTimeLeft <= 10 ? [1, 1.05, 1] : 1,
-                        transition: {
-                            duration: 0.5,
-                            repeat: totalTimeLeft <= 10 ? Infinity : 0,
-                        },
-                    }}
-                >
-                    <div className="flex items-center justify-between">
-                        <FontAwesomeIcon
-                            icon={faClock}
-                            className="text-light-primary w-7 h-7 dark:text-dark-primary"
-                        />
-                        <div className="sm:block hidden text-xs text-light-textSecondary dark:text-dark-textSecondary">
-                            Temps
-                        </div>
-                    </div>
-                    <div
-                        className={`mt-2 text-2xl font-bold ${
-                            totalTimeLeft <= 10
-                                ? "text-light-error dark:text-dark-error"
-                                : ""
-                        }`}
-                    >
-                        {Math.floor(totalTimeLeft / 60)}:
-                        {String(totalTimeLeft % 60).padStart(2, "0")}
-                    </div>
-                </motion.div>
-
-                {/* Streak */}
-                <motion.div className="bg-light-secondary min-w-28 dark:bg-dark-tertiary sm:block flex items-center flex-col rounded-2xl p-4 backdrop-blur-lg bg-opacity-90 dark:bg-opacity-90">
-                    <div className="flex items-center justify-between">
-                        <FontAwesomeIcon
-                            icon={faBolt}
-                            className="text-light-primary w-7 h-7 dark:text-dark-primary"
-                        />
-                        <div className="sm:block hidden text-xs text-light-textSecondary dark:text-dark-textSecondary">
-                            Streak
-                        </div>
-                    </div>
-                    <div
-                        className={`mt-2 text-2xl font-bold ${getStreakColor()}`}
-                    >
-                        {streak}x
-                        {streak >= 3 && (
-                            <motion.span
-                                initial={{ scale: 0 }}
-                                animate={{ scale: 1 }}
-                                className="inline-block ml-2 text-sm"
-                            >
-                                🔥
-                            </motion.span>
-                        )}
-                    </div>
-                </motion.div>
-                <motion.div
-                    className="bg-light-secondary min-w-28 dark:bg-dark-tertiary sm:block flex items-center flex-col rounded-2xl p-4 backdrop-blur-lg bg-opacity-90 dark:bg-opacity-90"
-                    animate={
-                        isIncreasing
-                            ? {
-                                  scale: [1, 1.1, 1],
-                                  transition: { duration: 0.3 },
-                              }
-                            : {}
-                    }
-                >
-                    <div className="flex items-center justify-between">
-                        <FontAwesomeIcon
-                            icon={faTrophy}
-                            className="text-light-primary w-7 h-7 dark:text-dark-primary"
-                        />
-                        <div className="text-xs sm:block hidden text-light-textSecondary dark:text-dark-textSecondary">
-                            Score
-                        </div>
-                    </div>
-                    <div className="mt-2 text-2xl font-bold text-light-primary dark:text-dark-primary">
-                        {score}
-                        <span className="text-sm ml-1">({multiplier}x)</span>
-                    </div>
-                </motion.div>
+        <header className="container mx-auto h-20 bg-light-primary dark:bg-dark-primary text-light-textPrimary dark:text-dark-textPrimary flex items-center justify-between px-4">
+            <div className="flex items-center space-x-4">
+                <FontAwesomeIcon
+                    icon={faBullseye}
+                    className="text-lg dark:text-dark-success text-light-success"
+                />
+                <span className="text-lg font-semibold ">
+                    Question {currentQuestion} / {totalQuestions}
+                </span>
             </div>
-        </div>
+
+            <div className="flex items-center space-x-4">
+                <FontAwesomeIcon
+                    icon={faClock}
+                    className="text-lg text-light-success dark:text-dark-success"
+                />
+                <span className="text-lg font-semibold">
+                    {formatTime(totalTimeLeft)}
+                </span>
+            </div>
+
+            <div className="flex items-center space-x-4">
+                <motion.div
+                    initial={{ scale: 1 }}
+                    animate={isIncreasing ? { scale: 1.2 } : { scale: 1 }}
+                    transition={{ duration: 0.3 }}
+                    className="flex items-center space-x-2"
+                >
+                    <FontAwesomeIcon
+                        icon={faTrophy}
+                        className="text-lg text-light-success dark:text-dark-success"
+                    />
+                    <span className="text-lg font-semibold">
+                        Score: {score}
+                    </span>
+                </motion.div>
+
+                <div className="flex items-center space-x-2">
+                    <FontAwesomeIcon
+                        icon={faBolt}
+                        className="text-lg text-light-success dark:text-dark-success"
+                    />
+                    <span className="text-lg font-semibold">
+                        Streak: {streak}x
+                    </span>
+                </div>
+
+                <div className="flex items-center space-x-2">
+                    <FontAwesomeIcon
+                        icon={faBolt}
+                        className="text-lg text-light-success dark:text-dark-success"
+                    />
+                    <span className="text-lg font-semibold">
+                        Multiplier: {multiplier}x
+                    </span>
+                </div>
+            </div>
+        </header>
     );
 };
 

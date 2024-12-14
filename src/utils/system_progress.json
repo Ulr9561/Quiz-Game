@@ -43,5 +43,12 @@
             { "level": 1, "reward": { "badge": "Beginner", "coins": 10 } },
             { "level": 10, "reward": { "badge": "Pro Quizzer", "coins": 100 } }
         ]
+    },
+    "active_streak_bonus": {
+        "days": 7,
+        "reward": {
+            "xp": 100,
+            "coins": 50
+        }
     }
 }

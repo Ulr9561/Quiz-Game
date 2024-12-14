@@ -11,7 +11,11 @@ import AuthenticatedActions from "./components/actions";
 const UnauthenticatedActions: React.FC = () => {
     return (
         <div className="flex flex-col md:flex-row md:items-center md:space-x-2 md:space-y-0 space-y-2 md:justify-between">
-            <Button color="primary" size="small">
+            <Button
+                variant="outlined"
+                className="hover:bg-light-primary/80 dark:hover:bg-dark-primary/80"
+                size="small"
+            >
                 Sign Up
             </Button>
             <Button color="secondary" size="small">
@@ -104,9 +108,9 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, links }) => {
                                 className={`
                 md:relative md:flex md:flex-row md:h-auto md:w-auto md:bg-transparent
                 absolute top-[72px] left-0 right-0 md:top-0
-                border-b border-light-border dark:border-dark-border md:shadow-none shadow-lg
+                border-b border-light-border dark:border-dark-border bg-light-tertiary dark:bg-dark-tertiary md:shadow-none shadow-lg
                 transition-all duration-300 ease-in-out
-                ${menu ? "flex flex-col bg-light-background dark:bg-dark-background" : "hidden md:flex "}
+                ${menu ? "flex flex-col" : "hidden md:flex "}
               `}
                             >
                                 <div className="container flex flex-col md:flex-row md:items-center md:space-x-4 space-y-4 md:space-y-0 px-4 py-4 md:p-0">

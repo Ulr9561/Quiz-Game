@@ -9,8 +9,8 @@ const DefaultLayout: React.FC = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (!window.location.href.includes('/quiz/')) {
-            dispatch(setIsQuiz(false));
+        if (window.location.href.includes('/quiz/')) {
+            dispatch(setIsQuiz(true));
         }
     }, [dispatch])
     return (
