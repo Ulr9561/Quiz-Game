@@ -20,7 +20,7 @@ type MenuItemProps = {
 const menuItems = [
     {
         name: "Profile",
-        href: "/",
+        href: "/user/profile",
         icon: faUser,
     },
     {
@@ -52,35 +52,44 @@ const Menu: React.FC = () => {
             >
                 <img src={Avatar} className="w-12 h-12 rounded-full" />
             </Button>
-            {isOpen && <MenuList ref={menuRef}/>}
+            {isOpen && <MenuList ref={menuRef} onClose={() => setIsOpen(false)} />}
         </div>
     );
 };
 
-const MenuList = forwardRef<HTMLDivElement, object>(({ ...props }, ref) => {
-    return (
-        <div
-            ref={ref}
-            className="absolute gap-3 bg-light-tertiary dark:bg-dark-tertiary w-56 rounded-lg px-4 py-2 top-20 right-3 flex flex-col space-y-2"
-            {...props}
-        >
-            {menuItems.map((item) => (
-                <MenuItem
-                    key={item.name}
-                    name={item.name}
-                    href={item.href}
-                    icon={item.icon}
-                />
-            ))}
-        </div>
-    );
-});
+const MenuList = forwardRef<HTMLDivElement, { onClose: () => void }>(
+    ({ onClose, ...props }, ref) => {
+        return (
+            <div
+                ref={ref}
+                className="absolute gap-3 bg-light-tertiary dark:bg-dark-tertiary w-56 rounded-lg px-4 py-2 top-20 right-3 flex flex-col space-y-2"
+                {...props}
+            >
+                {menuItems.map((item) => (
+                    <MenuItem
+                        key={item.name}
+                        name={item.name}
+                        href={item.href}
+                        icon={item.icon}
+                        onClick={onClose}
+                    />
+                ))}
+            </div>
+        );
+    },
+);
 
-const MenuItem: React.FC<MenuItemProps> = ({ name, href, icon }) => {
+const MenuItem: React.FC<MenuItemProps & { onClick: () => void }> = ({
+    name,
+    href,
+    icon,
+    onClick
+}) => {
     return (
         <NavLink
             className="flex font-mono justify-between items-center text-light-textPrimary group dark:text-dark-textPrimary text-[17px]"
             href={href}
+            onClick={onClick}
         >
             <div className="flex flex-row justify-center items-center space-x-2">
                 <FontAwesomeIcon icon={icon} />

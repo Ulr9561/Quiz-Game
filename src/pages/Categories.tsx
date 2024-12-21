@@ -49,7 +49,7 @@ const Categories: React.FC = () => {
                     </div>
 
                     {openCategories[category] && (
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
                             {groupedQuizData[category].map(
                                 (quiz: QuizCardProps) => (
                                     <QuizCard

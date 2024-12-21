@@ -6,6 +6,7 @@ import ToggleDarkMode from "../Theme";
 import { faBars, faClose } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import AuthenticatedActions from "./components/actions";
+import { useLocation } from "react-router-dom";
 
 
 const UnauthenticatedActions: React.FC = () => {
@@ -13,12 +14,16 @@ const UnauthenticatedActions: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-center md:space-x-2 md:space-y-0 space-y-2 md:justify-between">
             <Button
                 variant="outlined"
-                className="hover:bg-light-primary/80 dark:hover:bg-dark-primary/80"
+                className="hover:bg-light-primary/80 rounded-full p-4 border-[1px] border-solid dark:hover:bg-dark-primary/80"
                 size="small"
             >
                 Sign Up
             </Button>
-            <Button color="secondary" size="small">
+            <Button
+                color="secondary"
+                className="rounded-full p-4 border-1"
+                size="small"
+            >
                 Login
             </Button>
         </div>
@@ -28,6 +33,7 @@ const UnauthenticatedActions: React.FC = () => {
 const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, links }) => {
     const [menu, setMenu] = useState<boolean>(false);
     const [openNotifications, setOpenNotifications] = useState<boolean>(false);
+    const { pathname } = useLocation();
     const [notifications] = useState([
         {
             id: 1,
@@ -90,7 +96,17 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, links }) => {
                     {isAuthenticated && (
                         <div className="lg:flex flex-1 hidden justify-center items-center gap-8">
                             {authenticatedLinks.map((link) => (
-                                <NavLink key={link.label} href={link.href}>{link.label}</NavLink>
+                                <NavLink
+                                    key={link.label}
+                                    href={link.href}
+                                    className={`${
+                                        pathname === link.href
+                                            ? "text-light-primary dark:text-dark-primary font-semibold"
+                                            : "text-light-textPrimary dark:text-dark-textPrimary hover:text-light-primary"
+                                    }`}
+                                >
+                                    {link.label}
+                                </NavLink>
                             ))}
                         </div>
                     )}

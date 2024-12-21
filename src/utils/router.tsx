@@ -7,6 +7,7 @@ import QuizGame from "../pages/QuizGame";
 import Categories from "../pages/Categories";
 import SignUp from "../pages/Auth/Register";
 import LoginPage from "../pages/Auth/Login";
+import Profile from "../pages/Profile";
 
 const router = createBrowserRouter([
     {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
             {
                 path: "/categories",
                 element: <Categories />,
+            },
+            {
+                path: "/user/profile",
+                element: <Profile />,
             },
         ],
     },

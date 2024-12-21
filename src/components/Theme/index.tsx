@@ -8,16 +8,22 @@ const ToggleDarkMode: React.FC = () => {
 
     const toggleDarkMode = () => {
         const root = document.getElementById("root");
+
         if (root) {
-            root.classList.toggle("dark");
-            setIsDark(root.classList.contains("dark"));
+            const dark = root.classList.toggle("dark");
+            setIsDark(dark);
+            localStorage.setItem("darkMode", dark.toString());
         }
     };
 
     useEffect(() => {
         setMounted(true);
         const root = document.getElementById("root");
-        setIsDark(root?.classList.contains("dark") || false);
+        const darkMode = localStorage.getItem("darkMode") === "true";
+        if (darkMode && root) {
+            root.classList.add("dark");
+        }
+        setIsDark(darkMode);
     }, []);
 
     if (!mounted) {

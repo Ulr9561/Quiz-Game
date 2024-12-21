@@ -8,7 +8,7 @@ const RecommandedQuizzes: React.FC = () => {
                 Quiz recommandés
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {quizData.map((quiz) => (
+                {quizData.slice(0, 8).map((quiz) => (
                     <QuizCard
                         key={quiz.title}
                         title={quiz.title}

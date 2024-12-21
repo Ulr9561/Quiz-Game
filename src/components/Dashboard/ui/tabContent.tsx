@@ -6,7 +6,7 @@ type TabContentProps = {
 };
 const TabContent: React.FC<TabContentProps> = ({ contentType }) => {
     return (
-        <div className="bg-light-tertiary lg:col-span-3 dark:bg-dark-tertiary p-6 rounded-lg shadow">
+        <div className="lg:col-span-3 p-6 rounded-lg ">
             {contentType === "recent" ? (
                 <RecentActivities />
             ) : (

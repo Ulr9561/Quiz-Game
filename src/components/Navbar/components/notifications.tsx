@@ -2,6 +2,7 @@ import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../../Button";
 import React, { forwardRef, useRef } from "react";
+import Badge from "../../Badge";
 
 export type NotificationProps = {
     id: number;
@@ -31,9 +32,12 @@ const NotificationBell: React.FC<{
                 className="relative p-2 dark:bg-dark-tertiary bg-light-tertiary rounded-full transition-colors"
             >
                 <FontAwesomeIcon icon={faBell} className="w-6 h-6" />
-                <span className="absolute -top-1 -right-1 bg-light-error dark:bg-dark-error text-white rounded-full w-4 h-4 text-xs flex items-center justify-center">
-                    {notifications.length}
-                </span>
+                <Badge
+                    content={notifications.length}
+                    position="top-right"
+                    color='yellow'
+                    isPill
+                />
             </Button>
             {isOpen && (
                 <NotificationsPanel
