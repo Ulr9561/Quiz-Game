@@ -1,11 +1,10 @@
 import { AnimatePresence, motion } from "framer-motion";
 import QuizResults from "./QuizResults";
 import { useQuiz } from "../hooks/useQuiz";
-import QuizHeader from "../components/Quiz/ui/header";
-// import image from "../assets/desert.webp";
 import QuizQuestion from "../components/Quiz/ui/questions";
 import QuizOptions from "../components/Quiz/ui/options";
 import { useEffect } from "react";
+import { usePreventBack, usePreventReload } from "../hooks/usePreventReload";
 
 const QuizGame = () => {
     const {
@@ -16,10 +15,8 @@ const QuizGame = () => {
         timeLeft,
         currentQuestionIndex,
         restartQuiz,
-        xp,
         questions,
         direction,
-        streak,
         isQuizOver,
     } = useQuiz();
 
@@ -44,6 +41,23 @@ const QuizGame = () => {
     ]);
 
     if (!quiz) return null;
+    const onunload = () => {
+        console.log("Attempting to unload");
+    };
+
+    const onback = () => {
+        console.log("Navigation arrière détectée !");
+        if (window.confirm("Êtes-vous sûr de vouloir quitter cette page ?")) {
+            window.history.back();
+            console.log("Back to history");
+        } else {
+            window.history.pushState(null, "", window.location.href);
+            console.log("Pushing to history");
+        }
+    };
+
+    usePreventReload(onunload);
+    usePreventBack(onback);
 
     if (isQuizOver) {
         const totalTimeSpent = quiz.duration - timeLeft;
@@ -70,19 +84,6 @@ const QuizGame = () => {
     return (
         <div className="relative font-grotesk w-full bg-light-background dark:bg-dark-background overflow-hidden">
             <div className="relative z-10 flex flex-col">
-                <div>
-                    <QuizHeader
-                        currentQuestion={
-                            currentQuestionIndex ? currentQuestionIndex + 1 : 0
-                        }
-                        totalQuestions={quiz.questions.length}
-                        totalTimeLeft={timeLeft}
-                        score={score}
-                        streak={streak}
-                        multiplier={8}
-                        xp={xp}
-                    />
-                </div>
                 <div className="flex-grow flex items-center justify-center px-4 pt-10">
                     <AnimatePresence mode="wait" custom={direction}>
                         <motion.div

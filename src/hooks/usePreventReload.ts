@@ -1,18 +1,36 @@
 import { useEffect } from "react"
 
-const usePreventReload = (onUnloadCallback: () => void) => {
+const usePreventReload = (onunload: () => void) => {
     useEffect(() => {
         const handleBeforeUnload = (event: BeforeUnloadEvent) => {
             event.preventDefault();
-            onUnloadCallback();
+            onunload();
         };
         window.addEventListener("beforeunload", handleBeforeUnload);
 
         return () => {
             window.removeEventListener("beforeunload", handleBeforeUnload);
         };
-    }, [onUnloadCallback]);
+    }, [onunload]);
 };
 
-export default usePreventReload;
+const usePreventBack = (onback: () => void) => {
+    useEffect(() => {
+        const handlePopState = () => {
+           
+            onback();
+            window.history.pushState(null, "", window.location.href);
+        };
+
+        window.history.pushState(null, "", window.location.href);
+
+        window.addEventListener("popstate", handlePopState);
+
+        return () => {
+            window.removeEventListener("popstate", handlePopState);
+        };
+    }, [onback]);
+};
+
+export {usePreventReload, usePreventBack};
 

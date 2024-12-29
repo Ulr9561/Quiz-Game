@@ -42,8 +42,7 @@ const QuizHeader: React.FC<QuizHeaderProps> = ({
     };
 
     return (
-        <header className="container mx-auto h-auto px-4 py-2 bg-light-primary dark:bg-dark-primary text-light-textPrimary dark:text-dark-textPrimary flex flex-col md:flex-row items-center md:justify-between space-y-4 md:space-y-0">
-            {/* Section: Question */}
+        <header className="font-grotesk h-[80px] px-4 py-2 bg-light-primary dark:bg-dark-primary text-light-textPrimary dark:text-dark-textPrimary flex flex-col md:flex-row items-center md:justify-between space-y-4 md:space-y-0">
             <div className="flex items-center space-x-4 w-full md:w-auto justify-between md:justify-start">
                 <FontAwesomeIcon
                     icon={faBullseye}
@@ -54,7 +53,6 @@ const QuizHeader: React.FC<QuizHeaderProps> = ({
                 </span>
             </div>
 
-            {/* Section: Timer */}
             <div className="flex items-center space-x-4 w-full md:w-auto justify-between md:justify-start">
                 <FontAwesomeIcon
                     icon={faClock}
@@ -65,7 +63,6 @@ const QuizHeader: React.FC<QuizHeaderProps> = ({
                 </span>
             </div>
 
-            {/* Section: Score and Streak */}
             <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 w-full md:w-auto justify-between md:justify-start">
                 <motion.div
                     initial={{ scale: 1 }}
