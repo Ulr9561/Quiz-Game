@@ -27,6 +27,7 @@ const QuizHeader: React.FC<QuizHeaderProps> = ({
 }) => {
     const [isIncreasing, setIsIncreasing] = useState(false);
 
+    
     useEffect(() => {
         if (score > 0) {
             setIsIncreasing(true);

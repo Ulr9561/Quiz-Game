@@ -3,8 +3,9 @@ import QuizResults from "./QuizResults";
 import { useQuiz } from "../hooks/useQuiz";
 import QuizQuestion from "../components/Quiz/ui/questions";
 import QuizOptions from "../components/Quiz/ui/options";
-import { useEffect } from "react";
 import { usePreventBack, usePreventReload } from "../hooks/usePreventReload";
+import QuizHeader from "../components/Quiz/ui/header";
+import { useEffect } from "react";
 
 const QuizGame = () => {
     const {
@@ -18,26 +19,33 @@ const QuizGame = () => {
         questions,
         direction,
         isQuizOver,
+        streak,
     } = useQuiz();
 
     useEffect(() => {
-        console.log("Current State:", {
+        console.log("Current state", {
             quiz,
-            currentQuestionIndex,
-            direction,
             score,
-            timeLeft,
             selectedOption,
+            timeLeft,
+            currentQuestionIndex,
+            restartQuiz,
+            questions,
+            direction,
             isQuizOver,
+            streak,
         });
     }, [
         quiz,
-        currentQuestionIndex,
-        direction,
         score,
-        timeLeft,
         selectedOption,
+        timeLeft,
+        currentQuestionIndex,
+        restartQuiz,
+        questions,
+        direction,
         isQuizOver,
+        streak,
     ]);
 
     if (!quiz) return null;
@@ -83,6 +91,16 @@ const QuizGame = () => {
 
     return (
         <div className="relative font-grotesk w-full bg-light-background dark:bg-dark-background overflow-hidden">
+            <QuizHeader
+                currentQuestion={
+                    currentQuestionIndex + 1
+                }
+                totalQuestions={quiz.questions.length}
+                totalTimeLeft={timeLeft}
+                score={score}
+                streak={streak}
+                multiplier={8}
+            />
             <div className="relative z-10 flex flex-col">
                 <div className="flex-grow flex items-center justify-center px-4 pt-10">
                     <AnimatePresence mode="wait" custom={direction}>

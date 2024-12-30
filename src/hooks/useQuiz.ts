@@ -31,10 +31,10 @@ export const useQuiz = () => {
     }
 
     useEffect(() => {
-        if (isQuizOver || timeLeft === 0) {
+        if (timeLeft === 0) {
+            setIsQuizOver(true);
             return;
         }
-
         const timer = setInterval(() => {
             setTimeLeft((prev) => Math.max(prev - 1, 0));
         }, 1000);

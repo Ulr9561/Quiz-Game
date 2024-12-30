@@ -6,7 +6,7 @@ export type NavLinkProps = {
     children: ReactNode;
     className?: string;
     isActive?: boolean;
-}
+};
 
 export interface FeatureCardProps {
     icon: IconDefinition;
@@ -64,4 +64,20 @@ interface QuizStat {
     score: number;
     date: Date;
     solve_time: string;
+}
+
+export interface QuizContextType {
+    quiz: Quiz | null;
+    score: number;
+    streak: number;
+    xp: number;
+    currentLevel: number;
+    timeLeft: number;
+    currentQuestionIndex: number;
+    selectedOption: number | null;
+    isQuizOver: boolean;
+    handleAnswer?: (optionIndex: number) => void;
+    restartQuiz?: () => void;
+    direction: number;
+    questions: number;
 }
