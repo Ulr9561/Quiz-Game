@@ -3,7 +3,6 @@ import Navbar from "../components/Navbar";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { selectIsQuiz, setIsQuiz } from "../app/slices/navbar";
 import { useEffect } from "react";
-import { useQuiz } from "../hooks/useQuiz";
 
 const DefaultLayout: React.FC = () => {
     const isQuiz = useAppSelector(selectIsQuiz);
@@ -14,9 +13,6 @@ const DefaultLayout: React.FC = () => {
             dispatch(setIsQuiz(true));
         }
     }, [dispatch]);
-
-    const { quiz } = useQuiz();
-    if (!quiz) return null;
 
     return (
         <div className="min-h-screen bg-light-background dark:bg-dark-background text-light-textPrimary dark:text-dark-textPrimary">

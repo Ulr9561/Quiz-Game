@@ -6,6 +6,7 @@ interface DisplayOptionsProps {
     selectedOption: number | null;
     handleOptionSelect: (index: number) => void;
 }
+
 const DisplayOptions: React.FC<DisplayOptionsProps> = ({ options, selectedOption, handleOptionSelect }) => {
     return (
         <div className="w-full grid grid-cols-2 max-w-xl gap-2">

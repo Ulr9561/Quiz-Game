@@ -48,7 +48,7 @@ const QuizGame = () => {
         streak,
     ]);
 
-    if (!quiz) return null;
+    
     const onunload = () => {
         console.log("Attempting to unload");
     };
@@ -67,6 +67,7 @@ const QuizGame = () => {
     usePreventReload(onunload);
     usePreventBack(onback);
 
+    if (!quiz) return null;
     if (isQuizOver) {
         const totalTimeSpent = quiz.duration - timeLeft;
         return (

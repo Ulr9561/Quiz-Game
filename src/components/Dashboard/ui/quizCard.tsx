@@ -1,7 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faStar, faTrophy } from "@fortawesome/free-solid-svg-icons";
-import { faImage } from "@fortawesome/free-regular-svg-icons";
 import Button from "../../Button";
 import { QuizCardProps } from "..";
 import { useAppDispatch } from "../../../app/hooks";
@@ -50,13 +49,7 @@ const QuizCard: React.FC<QuizCardProps> = ({
     };
 
     return (
-        <div className="border hover:-translate-y-2 transition-transform duration-200 border-light-border font-mono dark:border-dark-border rounded-lg shadow-md overflow-hidden bg-light-background dark:bg-dark-background max-w-xs">
-            <div className="bg-light-textSecondary dark:bg-dark-textSecondary h-32 flex items-center justify-center">
-                <FontAwesomeIcon
-                    icon={faImage}
-                    className="text-light-textSecondary dark:text-dark-textSecondary"
-                />
-            </div>
+        <div className="border hover:-translate-y-2 transition-transform duration-200 border-light-border font-mono dark:border-dark-border rounded-lg shadow-md overflow-hidden bg-light-tertiary dark:bg-dark-tertiary max-w-xs">
             <div className="p-4 flex flex-col justify-between">
                 <div className="">
                     <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-1">
@@ -101,7 +94,7 @@ const QuizCard: React.FC<QuizCardProps> = ({
                 <Button
                     color="primary"
                     onClick={() => {
-                        console.log('Ok but it doesn\'t matter');
+                        console.log("Ok but it doesn't matter");
                         dispatch(
                             setQuiz({
                                 title,
@@ -115,9 +108,8 @@ const QuizCard: React.FC<QuizCardProps> = ({
                             }),
                         );
                         dispatch(setIsQuiz(true));
-                        navigate('/quiz/' + title);
-                    }
-                    }
+                        navigate("/quiz/" + title);
+                    }}
                     className="w-full text-sm py-1.5 rounded-sm transform transition-transform hover:scale-105"
                 >
                     Jouer
